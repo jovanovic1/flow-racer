@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044c6937c7ef4c2da3345b440a6fa8dc, type: 3}
+  m_Name: AcceptWager
+  m_EditorClassIdentifier: 
+  text: ' import FlowRacer from 0x0fb46f70bfa68d94 import ExampleToken from 0x0fb46f70bfa68d94
+    import FungibleToken from 0x9a0766d93b6608b7   transaction(matchId: UInt64, amount:
+    UInt64){      // The Vault resource that holds the tokens that are being transferred    
+    let sender: @ExampleToken.Vault     // let vault: Capability //<&ExampleToken.Vault{FungibleToken.Receiver}>    
+    /// Reference to the Fungible Token Receiver of the recipient     let tokenReceiver:
+    &{FungibleToken.Receiver}     let address: Address       prepare(signer: AuthAccount){         
+    self.sender <- signer.borrow<&ExampleToken.Vault>(from: ExampleToken.VaultStoragePath)!.withdraw(amount:
+    UFix64(amount)) as! @ExampleToken.Vault          // Get the account of the recipient
+    and borrow a reference to their receiver         // var account = getAccount(0xf8d6e0586b0a20c7)        
+    var account = getAccount(0x0fb46f70bfa68d94)                  self.tokenReceiver
+    = account             .getCapability(ExampleToken.ReceiverPublicPath)            
+    .borrow<&{FungibleToken.Receiver}>()             ?? panic("Unable to borrow receiver
+    reference")          // self.vault = signer.getCapability(ExampleToken.ReceiverPublicPath)         
+    self.address = signer.address      }      execute{          FlowRacer.acceptWager(            
+    matchId: matchId,              amount: amount,              account: self.address,            
+    requestorVault: <- self.sender,             receiverCapability: self.tokenReceiver        
+    )      } }'

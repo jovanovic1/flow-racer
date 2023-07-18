@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044c6937c7ef4c2da3345b440a6fa8dc, type: 3}
+  m_Name: DistributeWager
+  m_EditorClassIdentifier: 
+  text: ' import FlowRacer from 0x0fb46f70bfa68d94 import ExampleToken from 0x0fb46f70bfa68d94
+    import FungibleToken from 0x9a0766d93b6608b7  transaction(         matchId: UInt64,        
+    winner: Address,     ){      let tokenReciever: &{FungibleToken.Receiver}    
+    // let NFTRecievingCapability: &{NonFungibleToken.CollectionPublic}     // let
+    minter: &InferenceNFT.NFTMinter      let senderVault: Capability<&ExampleToken.Vault>    
+    let address: Address      prepare(signer: AuthAccount){          self.senderVault
+    = signer.getCapability<&ExampleToken.Vault>(/private/exampleTokenVault)         
+    self.tokenReciever = signer             .getCapability(ExampleToken.ReceiverPublicPath)            
+    .borrow<&{FungibleToken.Receiver}>()             ?? panic("Unable to borrow receiver
+    reference")           // self.NFTRecievingCapability = getAccount(signer.address).getCapability(InferenceNFT.CollectionPublicPath)         
+    //                 .borrow<&InferenceNFT.Collection{NonFungibleToken.CollectionPublic}>()        
+    //                 ?? panic("Failed to get User''s collection.")          //
+    // borrow a reference to the NFTMinter resource in storage         // self.minter
+    = signer.borrow<&InferenceNFT.NFTMinter>(from: InferenceNFT.MinterStoragePath)        
+    //     ?? panic("Account does not store an object at the specified path")         
+    self.address = signer.address      }     execute{          FlowRacer.distributeWager(            
+    matchId: matchId,              winner: winner,             tokenProvider: self.senderVault,            
+    responderRecievingCapability: self.tokenReciever         )      } }     '
