@@ -1,0 +1,11 @@
+Download the latest Mac build from here: 
+https://drive.google.com/file/d/1lQ0nnzIoefHiRqrPEWWyEfLj3nKkmO3P/view?usp=sharing
+
+If it throws an error while opening the app pls follow these steps:
+1. Open Settings
+2. Go to Privacy & Security
+3. Under Security section on the right, allow app downloads from "App Store and identified developers"
+
+Opening the app now should not be a problem
+Cheers
+Happy Racing!
